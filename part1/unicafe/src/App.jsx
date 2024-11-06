@@ -28,7 +28,10 @@ const ButtonContainer = (props) => {
 
 const StatisticLine = (props) => {
   return (
-    <span>{props.text} {props.value}</span>
+    <tr>
+        <td>{props.text}</td>
+        <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -42,14 +45,14 @@ const Stats = ({good, neutral, bad}) => {
   if (isNull) return(<span>no feedback given</span>);
   
   else return(
-    <div style={{display: 'flex', flexDirection: 'column'}}>
+    <table>
       <StatisticLine text="good" value={good}/>
       <StatisticLine text="neutral" value={neutral}/>
       <StatisticLine text="bad" value={bad}/>
       <StatisticLine text="all" value={total}/>
       <StatisticLine text="average" value={Math.round(((good - bad) * 100)/ total) / 100}/>
-      <StatisticLine text="positive" value={(good / total) * 100}/>
-    </div>
+      <StatisticLine text="positive" value={`${Math.round((good / total) * 10000) / 100} %`}/>
+    </table>
   )
 }
 
