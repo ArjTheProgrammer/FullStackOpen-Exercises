@@ -15,7 +15,8 @@ const ButtonContainer = (props) => {
   const buttons = [ 
     { text: 'good', handleClick: () => props.setGood(props.good + 1) }, 
     { text: 'neutral', handleClick: () => props.setNeutral(props.neutral + 1) }, 
-    { text: 'bad', handleClick: () => props.setBad(props.bad + 1) } ];
+    { text: 'bad', handleClick: () => props.setBad(props.bad + 1) } 
+  ];
   return(
     <div style={{ display: 'flex'}}>
     {buttons.map( (button, index) => (
@@ -26,11 +27,15 @@ const ButtonContainer = (props) => {
 }
 
 const Stats = ({good, neutral, bad}) => {
+  const average = good + neutral + bad;;
   return(
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <span>good {good}</span>
       <span>neutral {neutral}</span>
       <span>bad {bad}</span>
+      <span>all {average}</span>
+      <span>average {Math.round(((good - bad) * 100)/ average) / 100}</span>
+      <span>positive {(good / average) * 100} %</span>
     </div>
   )
 }
