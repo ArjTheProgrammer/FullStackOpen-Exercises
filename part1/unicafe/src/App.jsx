@@ -27,8 +27,23 @@ const ButtonContainer = (props) => {
 }
 
 const Stats = ({good, neutral, bad}) => {
-  const average = good + neutral + bad;;
-  return(
+  const average = good + neutral + bad;
+  const states = [good, neutral, bad];
+  let isNull = true;
+
+  for (let state of states){
+    if (state != 0){
+      isNull = false;
+      break;
+    }
+    else {
+      continue;
+    } 
+  }
+
+  if (isNull) return(<span>no feedback given</span>);
+  
+  else return(
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <span>good {good}</span>
       <span>neutral {neutral}</span>
