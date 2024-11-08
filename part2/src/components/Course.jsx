@@ -19,17 +19,17 @@ const Header = (props) => {
     return(
       <>
         {
-          props.parts.map((part, index) => <Part key={index} name={part.name} exercises={part.exercises}/>)
+          props.parts.map((part) => <Part key={part.id} name={part.name} exercises={part.exercises}/>)
         }
       </>
     )
   }
   
-//   const Total = (props) => {
-//     return (
-//       <p>Number of exercises {props.parts.reduce((total, part) => total += part.exercises, 0)}</p>
-//     )
-//   }
+  const Total = (props) => {
+    return (
+      <p style={{fontWeight: "boldest"}}>total of {props.parts.reduce((total, part) => total += part.exercises, 0)}  exercises</p>
+    )
+  }
   
   const Course = ({course}) => {
 
@@ -37,7 +37,7 @@ const Header = (props) => {
       <div>
         <Header course={course.name}/>
         <Content parts={course.parts}/>
-        {/* <Total parts={course.parts}/> */}
+        <Total parts={course.parts}/>
       </div>
     )
   }
