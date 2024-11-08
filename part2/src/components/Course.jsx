@@ -1,7 +1,7 @@
 const Header = (props) => {
     return (
       <>
-        <h1>{props.course}</h1>
+        <h2>{props.course}</h2>
       </>
     )
   }
@@ -27,7 +27,7 @@ const Header = (props) => {
   
   const Total = (props) => {
     return (
-      <p style={{fontWeight: "boldest"}}>total of {props.parts.reduce((total, part) => total += part.exercises, 0)}  exercises</p>
+      <p style={{fontWeight: "1000"}}>total of {props.parts.reduce((total, part) => total += part.exercises, 0)}  exercises</p>
     )
   }
   
