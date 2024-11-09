@@ -8,13 +8,14 @@ const App = () => {
 
   const [newName, setNewName] = useState('')
 
-  const copy = [...persons];
-
   const addPerson = (event) => {
     event.preventDefault()
+    if (persons.some(person => person.name === newName)) alert(`${newName} is already added in the phonebook`)
+    else {
     copy.push({name: newName})
-    setPersons(copy)
+    setPersons(persons.concat({ name: newName }))
     setNewName("")
+    } 
   }
 
   const handlePersonChange = (event) => {
