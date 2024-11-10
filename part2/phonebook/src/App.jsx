@@ -21,8 +21,6 @@ const App = () => {
     })
   }, [])
 
-  console.log(persons.length);
-
   const addPerson = (event) => {
     event.preventDefault()
     if (persons.some(person => person.name === newName)) alert(`${newName} is already added in the phonebook`)
@@ -42,6 +40,16 @@ const App = () => {
     } 
   }
 
+  const deletePerson = (name, id) => {
+    if(confirm(`Delete ${name} ?`)){
+      phonebookService
+      .dlt(id)
+      .then(response => {
+        setPersons(persons.filter(person => person.id != response.id))
+      })
+    }
+  }
+
   const handlePersonChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
@@ -59,7 +67,6 @@ const App = () => {
 
   const personsToShow = newSearch === '' ? persons : persons.filter(person => person.name.toLowerCase().includes(newSearch));
 
-
   return (
     <div>
       <h2>Phonebook</h2>
@@ -69,7 +76,7 @@ const App = () => {
       num={newNum} numChange={handleNumChange}
       />
       <h3>Numbers</h3>
-      <Persons persons={personsToShow}/>
+      <Persons persons={personsToShow} handleDelete={deletePerson}/>
     </div>
   )
 }
