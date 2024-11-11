@@ -7,6 +7,8 @@ import Countries from './components/Countries'
 function App() {
   const [countries, setNewCountries] = useState([])
   const [search, setNewSearch] = useState('')
+  const [country, setNewCountry] = useState([])
+  const [showCountry, setShowCountry] = useState(true)
 
   useEffect(() => {
     console.log(`contries is currently`, countries)
@@ -23,13 +25,26 @@ function App() {
   }, [])
 
   const handleSearch = (event) => {
+    setShowCountry(false)
+    console.log(event.target.value)
     setNewSearch(event.target.value)
   }
 
+  const handleShow = (event) => {
+    setShowCountry(true)
+    countriesService
+      .getCountry(event.target.value)
+      .then(response => {
+        setNewCountry([response])
+      })
+  }
+
+  const showCountries = !showCountry ? countries : country
+
   return (
     <>
-      <FindCountry onChange={handleSearch}/>
-      <Countries countries={countries} search={search}/>
+      <FindCountry value={search} onChange={handleSearch}/>
+      <Countries countries={showCountries} search={search} onShow={handleShow}/>
     </>
   )
 }
