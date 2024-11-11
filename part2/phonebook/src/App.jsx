@@ -43,18 +43,21 @@ const App = () => {
           setNewName("")
           setNewNum("")
 
-          setNewMessage(`Added ${returnedPerson.name}`)
-          setTimeout(() => setNewMessage(null), 5000)
+          setNewMessage(`Updated ${existingPerson.name}`)
         })
+        .catch(error => setNewMessage(`Information of ${existingPerson.name} has been removed from the server`))
       }
     }
     else {
       phonebookService
       .create(personObject)
-      .then(response => {
-        setPersons(persons.concat(response))
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
         setNewName("")
         setNewNum("")
+
+        setNewMessage(`Added ${returnedPerson.name}`)
+        setTimeout(() => setNewMessage(null), 5000)
       })
     } 
   }

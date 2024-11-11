@@ -5,7 +5,7 @@ const Notification = ({ message }) => {
   
     return (
       <div style={{
-        color: "green",
+        color: message.includes("Added") || message.includes("Updated") ? "green" : "red",
         background: "lightgrey",
         fontSize: 20,
         borderStyle: "solid",
