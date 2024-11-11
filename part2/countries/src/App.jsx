@@ -11,17 +11,13 @@ function App() {
   const [showCountry, setShowCountry] = useState(true)
 
   useEffect(() => {
-    console.log(`contries is currently`, countries)
-
-    if(countries){
-      console.log("fetching countries...")
+    console.log(`countries is currently`, countries)
 
       countriesService
       .getAll()
       .then(response => {
         setNewCountries(response)
       })
-    }
   }, [])
 
   const handleSearch = (event) => {
