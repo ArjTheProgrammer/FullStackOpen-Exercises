@@ -68,6 +68,8 @@ const App = () => {
       .dlt(id)
       .then(response => {
         setPersons(persons.filter(person => person.id != response.id))
+        setNewMessage(`Deleted ${name}`)
+        setTimeout(() => setNewMessage(null), 5000)
       })
     }
   }
