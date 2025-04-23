@@ -59,6 +59,10 @@ const App = () => {
         setNewMessage(`Added ${returnedPerson.name}`)
         setTimeout(() => setNewMessage(null), 5000)
       })
+      .catch(error => {
+        setNewMessage(error.response.data.error)
+        setTimeout(() => setNewMessage(null), 5000)
+      })
     } 
   }
 
