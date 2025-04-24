@@ -1,6 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { voteFor } from '../reducers/anecdoteReducer'
 import PropTypes from 'prop-types'
+import { createSelector } from '@reduxjs/toolkit'
+
+const selectAnecdotes = state => state.anecdotes
+const selectFilter = state => state.filter
+
+const filteredAnecdotes = createSelector(
+  [selectAnecdotes, selectFilter],
+  (anecdotes, filter) => {
+    return anecdotes
+      .filter(anecdote => anecdote.content.toLowerCase().includes(filter.toLowerCase()))
+      .slice()
+      .sort((a, b) => b.votes - a.votes)
+  }
+)
 
 const Anecdote = ({ anecdote, handleVote }) => {
     return (
@@ -25,17 +39,16 @@ Anecdote.propTypes = {
   handleVote: PropTypes.func.isRequired
 }
 
-const Anecdotes = () => {
+const AnecdoteList = () => {
     const dispatch = useDispatch()
-    const anecdotes = useSelector(state => state).slice().sort((a, b) => b.votes - a.votes)
+    const anecdotes = useSelector(filteredAnecdotes)
 
 
     return (
         <div>
-            <h2>Anecdotes</h2>
             {anecdotes.map(anecdote => <Anecdote key={anecdote.id} anecdote={anecdote} handleVote={() => dispatch(voteFor(anecdote.id))}/>)}
         </div>
     )
 }
 
-export default Anecdotes
+export default AnecdoteList
