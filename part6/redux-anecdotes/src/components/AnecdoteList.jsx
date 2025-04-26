@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { createSelector } from '@reduxjs/toolkit'
+import { voteFor } from '../reducers/anecdoteReducer'
 
 const selectAnecdotes = state => state.anecdotes
 const selectFilter = state => state.filter
@@ -45,7 +46,7 @@ const AnecdoteList = () => {
 
     return (
         <div>
-            {anecdotes.map(anecdote => <Anecdote key={anecdote.id} anecdote={anecdote} handleVote={() => dispatch({type: 'anecdote/voteFor', payload: anecdote.id})}/>)}
+            {anecdotes.map(anecdote => <Anecdote key={anecdote.id} anecdote={anecdote} handleVote={() => dispatch(voteFor(anecdote.id))}/>)}
         </div>
     )
 }
