@@ -4,11 +4,13 @@
   import App from './App'
   import anecdoteReducer from './reducers/anecdoteReducer'
   import filterReducer from './reducers/filterReducer'
+  import messageReducer from './reducers/notificationReducer'
 
   const store = configureStore({
     reducer: {
       anecdotes: anecdoteReducer,
-      filter: filterReducer
+      filter: filterReducer,
+      message: messageReducer
     }
   })
 
