@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { voteFor } from '../reducers/anecdoteReducer'
 import PropTypes from 'prop-types'
 import { createSelector } from '@reduxjs/toolkit'
 
@@ -46,7 +45,7 @@ const AnecdoteList = () => {
 
     return (
         <div>
-            {anecdotes.map(anecdote => <Anecdote key={anecdote.id} anecdote={anecdote} handleVote={() => dispatch(voteFor(anecdote.id))}/>)}
+            {anecdotes.map(anecdote => <Anecdote key={anecdote.id} anecdote={anecdote} handleVote={() => dispatch({type: 'anecdote/voteFor', payload: anecdote.id})}/>)}
         </div>
     )
 }
