@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { createSelector } from '@reduxjs/toolkit'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
-import { setMessage } from '../reducers/notificationReducer'
+import { setNotification } from '../reducers/notificationReducer'
 
 const selectAnecdotes = state => state.anecdotes
 const selectFilter = state => state.filter
@@ -46,10 +46,7 @@ const AnecdoteList = () => {
 
     const vote = (id, content) => {
       dispatch(voteAnecdote(id))
-      dispatch(setMessage(`Successfully Voted for "${content}"`))
-      setTimeout(() => {
-        dispatch(setMessage(``))
-      }, 5000)
+      dispatch(setNotification(`successfully added ${content}!`, 10))
     }
 
     return (

@@ -11,7 +11,7 @@ import { initializeAnecdotes } from './reducers/anecdoteReducer'
 
     useEffect(() => {
       dispatch(initializeAnecdotes())
-    }, [])
+    }, [dispatch])
     
     return (
       <div>
